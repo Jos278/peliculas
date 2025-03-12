@@ -1,18 +1,16 @@
 import './App.css'
 import React from 'react'
 
-const Buscador = () => {
+const Card = () => {
     return (
         <div>
             <div>
               <div>
-              <h1 className='name'>Pelis</h1>
-            <input className="buscador" type="text"/>
-
+              <h1 className='results'>Resultados</h1>
             </div>
             </div>
         </div>
     )
 }
 
-export default Buscador
+export default Card
