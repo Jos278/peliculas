@@ -10,11 +10,13 @@ const MovieCard = ({ movie }) => {
     ? movie.overview
     : 'Descripción no disponible.';
 
+   
+
   return (
-    <div className="card">
+    <div className="card shadow-lg ">
       <img
         src={imageUrl}
-        className="card-img-top"
+        className="card"
         alt={movie.title || 'Sin título'}
         onError={(e) => {
           e.target.onerror = null;

@@ -14,7 +14,7 @@ const App = () => {
 
   return (
     <div className="container">
-      <h1 className="my-4">Buscador de Películas</h1>
+      <h1 className="my-4 text-center">Buscador de Películas</h1>
       <SearchBar onSearch={handleSearch} />
       <div className="row">
         {movies.length > 0 ? (
