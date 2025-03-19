@@ -10,14 +10,15 @@ const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <div>
+    <div className="input-group mb-3">
       <input
         type="text"
+        className="form-control"
         placeholder="Buscar películas..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-      <button onClick={handleSearch}>Buscar</button>
+      <button className="btn btn-primary" onClick={handleSearch}>Buscar</button>
     </div>
   );
 };
