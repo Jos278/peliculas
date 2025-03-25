@@ -6,10 +6,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   const [movies, setMovies] = useState([]);
+  const [hasSearched, setHasSearched] = useState(false);
 
   const handleSearch = async (query) => {
     const results = await searchMovies(query);
     setMovies(results);
+    setHasSearched(true);
   };
 
   return (
@@ -23,9 +25,9 @@ const App = () => {
               <MovieCard movie={movie} />
             </div>
           ))
-        ) : (
-          <p>No se encontraron resultados</p>
-        )}
+        ) : hasSearched ? (
+          <p className="text-center">No se encontraron resultados</p>
+        ) : null}
       </div>
     </div>
   );
