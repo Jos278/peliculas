@@ -1,24 +1,71 @@
 import React, { useState } from 'react';
-
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import './SearchBar.css';
+const MySwal = withReactContent(Swal); 
 const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
   const [searchType, setSearchType] = useState('movie');
+  const [isLoading, setIsLoading] = useState(false); 
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (query.trim()) {
-      onSearch(query, searchType);
+      setIsLoading(true); 
+      Swal.fire({
+        title: 'Buscando...',
+        text: 'Por favor espera mientras buscamos los resultados.',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading(); 
+        },
+      });
+
+      try {
+        const result = await onSearch(query, searchType); 
+
+        Swal.close();
+
+        if (Array.isArray(result) && result.length === 0) {
+         
+          Swal.fire({
+            icon: 'warning',
+            title: 'Sin resultados',
+            text: 'No se encontraron resultados para tu búsqueda.',
+          });
+        } 
+      } catch (err) {
+        Swal.close(); 
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Ocurrió un error al realizar la búsqueda.',
+        });
+      } finally {
+        setIsLoading(false); 
+      }
+    } else {
+      Swal.fire({
+        icon: 'info',
+        title: 'Campo vacío',
+        text: 'Por favor, ingresa tu película favorita.',
+      });
     }
   };
 
   return (
-    <div className="input-group mb-3">
+    <div className="input-group">
       <select
         className="form-select"
         value={searchType}
-        onChange={(e) => setSearchType(e.target.value)}
+        onChange={(e) => {
+          const selectedValue = e.target.value;
+          if (['movie', 'actor'].includes(selectedValue)) {
+            setSearchType(selectedValue);
+          }
+        }}
       >
-        <option value="movie">Buscar por Película</option>
-        <option value="actor">Buscar por Actor</option>
+        <option value="movie">Película</option>
+        <option value="actor">Actor</option>
       </select>
       <input
         type="text"
@@ -27,7 +74,26 @@ const SearchBar = ({ onSearch }) => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-      <button className="btn btn-primary" onClick={handleSearch}>Buscar</button>
+      <button className="btn btn-primary" onClick={handleSearch} disabled={isLoading}>
+        {isLoading ? (
+          <span
+            className="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            className="bi bi-search"
+            viewBox="0 0 16 16"
+          >
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+          </svg>
+        )}
+      </button>
     </div>
   );
 };
