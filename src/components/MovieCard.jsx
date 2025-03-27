@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getMovieCast } from '../Api';
 import Noimage from '../resources/No_img.jpg';
+import './MovieCard.css'; 
 
 const MovieCard = ({ movie }) => {
   const [cast, setCast] = useState([]);
@@ -19,7 +20,7 @@ const MovieCard = ({ movie }) => {
     : Noimage;
 
   return (
-    <div className="card shadow-lg">
+    <div className="card movie-card shadow-lg">
       <img
         src={imageUrl}
         className="card-img-top"
@@ -32,9 +33,10 @@ const MovieCard = ({ movie }) => {
       <div className="card-body">
         <h5 className="card-title">{movie.title || 'Sin título'}</h5>
         <p className="card-text">{movie.overview || 'Descripción no disponible.'}</p>
-        <p><strong>Reparto: </strong> 
-          {cast.length > 0 
-            ? cast.map(actor => actor.name).join(', ') 
+        <p>
+          <strong>Reparto: </strong>
+          {cast.length > 0
+            ? cast.map((actor) => actor.name).join(', ')
             : 'No disponible.'}
         </p>
       </div>
