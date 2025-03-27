@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getMovieCast } from '../Api';
 import Noimage from '../resources/No_img.jpg';
-import './MovieCard.css'; 
+import './MovieCard.css';
 
 const MovieCard = ({ movie }) => {
   const [cast, setCast] = useState([]);
@@ -15,9 +15,7 @@ const MovieCard = ({ movie }) => {
     fetchCast();
   }, [movie.id]);
 
-  const imageUrl = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
-    : Noimage;
+  const imageUrl = movie.poster_path ? `https://image.tmdb.org/t/p/w200${movie.poster_path}` : Noimage;
 
   return (
     <div className="card movie-card shadow-lg">
@@ -35,9 +33,7 @@ const MovieCard = ({ movie }) => {
         <p className="card-text">{movie.overview || 'Descripción no disponible.'}</p>
         <p>
           <strong>Reparto: </strong>
-          {cast.length > 0
-            ? cast.map((actor) => actor.name).join(', ')
-            : 'No disponible.'}
+          {cast.length > 0 ? cast.map((actor) => actor.name).join(', ') : 'No disponible.'}
         </p>
       </div>
     </div>

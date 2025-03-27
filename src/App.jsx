@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
-import { searchMovies } from './Api';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { searchMoviesAndActors } from './Api';
 import SearchBar from './components/SearchBar';
 import MovieCard from './components/MovieCard';
-import NotFound from './components/NotFound'; 
+import NotFound from './components/NotFound';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -12,7 +12,7 @@ const App = () => {
   const [hasSearched, setHasSearched] = useState(false);
 
   const handleSearch = async (query) => {
-    const results = await searchMovies(query);
+    const results = await searchMoviesAndActors(query);
     setMovies(results);
     setHasSearched(true);
   };
@@ -22,7 +22,6 @@ const App = () => {
       <div className="container">
         <h1 className="my-4 text-center anton-regular">Pro_Pelis</h1>
         <Routes>
-          {/* Ruta principal */}
           <Route
             path="/"
             element={
@@ -42,8 +41,6 @@ const App = () => {
               </>
             }
           />
-
-          {/* Ruta 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
