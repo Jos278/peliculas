@@ -1,17 +1,17 @@
-/* Estilo para el contenedor del input */
+
 .input-group {
   max-width: 600px;
   margin: 20px auto;
   display: flex;
   align-items: center;
-  border: 2px solid #007bff; /* Borde azul */
-  border-radius: 25px; /* Bordes redondeados */
-  background-color: #ffffff; /* Fondo blanco */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+  border: 2px solid #007bff; 
+  border-radius: 25px; 
+  background-color: #ffffff; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
   overflow: hidden;
 }
 
-/* Estilo para el input */
+
 .input-group input {
   flex: 1;
   border: none;
@@ -21,7 +21,7 @@
   color: #333;
 }
 
-/* Estilo para el select */
+
 .input-group select {
   border: none;
   padding: 10px 15px;
@@ -29,10 +29,9 @@
   outline: none;
   background-color: #f8f9fa;
   color: #333;
-  border-left: 1px solid #ddd; /* Separador entre el select y el input */
+  border-left: 1px solid #ddd; 
 }
 
-/* Estilo para el botón */
 .input-group button {
   background-color: #007bff;
   color: #fff;
@@ -44,10 +43,10 @@
 }
 
 .input-group button:hover {
-  background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+  background-color: #0056b3;
 }
 
 .input-group button:disabled {
-  background-color: #cccccc; /* Gris cuando está deshabilitado */
+  background-color: #cccccc; 
   cursor: not-allowed;
 }
