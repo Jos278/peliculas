@@ -13,8 +13,8 @@ const App = () => {
   const [movies, setMovies] = useState([]);
   const [hasSearched, setHasSearched] = useState(false);
 
-  const handleSearch = async (query) => {
-    const results = await searchMoviesAndActors(query);
+  const handleSearch = async (query, genreId) => {
+    const results = await searchMoviesAndActors(query, genreId);
     setMovies(results);
     setHasSearched(true);
   };
