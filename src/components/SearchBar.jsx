@@ -10,39 +10,55 @@ const SearchBar = ({ onSearch }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = async () => {
-    if (query.trim()) {
-      setIsLoading(true);
-      Swal.fire({
-        title: 'Buscando...',
-        text: 'Por favor espera mientras buscamos los resultados.',
-        allowOutsideClick: false,
-        didOpen: () => {
-          Swal.showLoading();
-        },
-      });
-
-      try {
-        await onSearch(query);
-        Swal.close();
-      } catch{
-        Swal.close();
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Ocurrió un error al realizar la búsqueda.',
-        });
-      } finally {
-        setIsLoading(false);
-      }
-    } else {
+    const trimmedQuery = query.trim();
+  
+    if (trimmedQuery === '') {
+      setQuery('');
       Swal.fire({
         icon: 'info',
         title: 'Campo vacío',
         text: 'Por favor, ingresa una película o actor.',
       });
+      return;
+    }
+    const Simbolos = /^[^a-zA-Z0-9]+$/.test(trimmedQuery);
+  
+    if (Simbolos) {
+      setQuery('');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Búsqueda no válida',
+        text: 'No puedes buscar solo con símbolos. Intenta con un nombre válido.',
+      });
+      return;
+    }
+  
+    setIsLoading(true);
+    Swal.fire({
+      title: 'Buscando...',
+      text: 'Por favor espera mientras buscamos los resultados.',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+  
+    try {
+      await onSearch(trimmedQuery);
+      Swal.close();
+    } catch {
+      Swal.close();
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Ocurrió un error al realizar la búsqueda.',
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
-
+  
+  
   return (
     <div className="input-group">
       <input

@@ -6,6 +6,8 @@ import MovieCard from './components/MovieCard';
 import NotFound from './components/NotFound';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import NoEncontrar from './resources/No_encontrar.png';
+
 
 const App = () => {
   const [movies, setMovies] = useState([]);
@@ -35,7 +37,16 @@ const App = () => {
                       </div>
                     ))
                   ) : hasSearched ? (
-                    <p className="text-center">No se encontraron resultados</p>
+                    <div className="text-center">
+                      <img
+                        src={NoEncontrar}
+                        alt="No encontrado"
+                        className="img-fluid"
+                        style={{ maxWidth: '400px', marginBottom: '10px' }} 
+                      />
+                      <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#000'}}>Lo sentimos, no encontramos ninguna película</p>
+                      <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#000'}}>Intenta buscar algo más</p>
+                    </div>
                   ) : null}
                 </div>
               </>
