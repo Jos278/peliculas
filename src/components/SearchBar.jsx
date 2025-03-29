@@ -9,13 +9,16 @@ const MySwal = withReactContent(Swal);
 const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [searchActive, setSearchActive] = useState(false); 
 
   useEffect(() => {
     const fetchResults = async () => {
       const trimmedQuery = query.trim();
       if (trimmedQuery === '') return;
-      
+
       setIsLoading(true);
+      setSearchActive(true); 
+
       try {
         await onSearch(trimmedQuery);
       } catch (error) {
@@ -31,17 +34,17 @@ const SearchBar = ({ onSearch }) => {
 
     const delayDebounceFn = setTimeout(() => {
       fetchResults();
-    }, 500); // Agrega un retraso para evitar demasiadas peticiones
+    }, 500); 
 
     return () => clearTimeout(delayDebounceFn);
   }, [query, onSearch]);
 
   return (
-    <div className="input-group">
+    <div className={`input-group ${searchActive ? 'search-active' : ''}`}> {/* Activar clase de animación */}
       <input
         type="text"
         className="form-control"
-        placeholder="Buscar película o actor..."
+        placeholder="Buscar película, actor o genero..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
@@ -55,4 +58,3 @@ const SearchBar = ({ onSearch }) => {
 };
 
 export default SearchBar;
-

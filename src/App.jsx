@@ -22,7 +22,7 @@ const App = () => {
   return (
     <Router>
       <div className="container">
-        <h1 className="my-4 text-center anton-regular">Pro_Pelis</h1>
+        <h1 className="my-4 text-center anton-regular">Pro Pelis</h1>
         <Routes>
           <Route
             path="/"
@@ -32,7 +32,7 @@ const App = () => {
                 <div className="row">
                   {movies.length > 0 ? (
                     movies.map((movie) => (
-                      <div className="col-md-4 mb-4" key={movie.id}>
+                      <div className="col-sm-6 col-md-4 mb-4" key={movie.id}>
                         <MovieCard movie={movie} />
                       </div>
                     ))
