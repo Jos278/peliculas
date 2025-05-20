@@ -17,10 +17,13 @@
 .movie-card img {
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  max-height: 300px;
-  width: 100%;
-  object-fit: contain;
+  width: auto;
+  max-height: auto;
+  height: 300px;
+  object-fit: contain; /* Muestra la imagen completa sin recortar */
   background-color: #f0f0f0;
+  display: block;
+  margin: 0 auto;
 }
 
 .movie-card .card-body {
@@ -56,4 +59,18 @@
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
+}
+
+@media (max-width: 1326px) {
+  .row > .col-md-4 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 576px) {
+  .row > .col-md-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
 }
